@@ -1,0 +1,18 @@
+qemu-system-x86_64 -hda /tmp/UmKmtaSCUb.dsk -m 4 -net none -nographic -monitor null
+PiLo hda1
+Loading.........
+Kernel command line: -q run alarm-multiple
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  419,020,800 loops/s.
+Boot complete.
+Executing 'alarm-multiple':
+(alarm-multiple) begin
+(alarm-multiple) Creating 5 threads to sleep 7 times each.
+(alarm-multiple) Thread 0 sleeps 10 ticks each time,
+(alarm-multiple) thread 1 sleeps 20 ticks each time, and so on.
+(alarm-multiple) If successful, product of iteration count and
+(alarm-multiple) sleep duration will appear in nondescending order.
+
+TIMEOUT after 5 seconds of host CPU time
