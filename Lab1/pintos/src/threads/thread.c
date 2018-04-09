@@ -11,7 +11,7 @@
 #include "threads/switch.h"
 #include "threads/synch.h"
 #include "threads/vaddr.h"
-#include "list.h"
+#include <list.h>
 #ifdef USERPROG
 #include "userprog/process.h"
 #endif
