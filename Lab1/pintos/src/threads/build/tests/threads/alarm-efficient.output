@@ -1,3 +1,0 @@
-alarm-multiple.output:Thread: 0 idle ticks, 598 kernel ticks, 0 user ticks
-alarm-simultaneous.output:Thread: 0 idle ticks, 295 kernel ticks, 0 user ticks
-alarm-single.output:Thread: 0 idle ticks, 293 kernel ticks, 0 user ticks
