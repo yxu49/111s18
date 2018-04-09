@@ -172,7 +172,7 @@ thread_create (const char *name, int priority,
   struct switch_threads_frame *sf;
   tid_t tid;
   enum intr_level old_level;
-
+  t->time_wakeup=0;
   ASSERT (function != NULL);
 
   /* Allocate thread. */
