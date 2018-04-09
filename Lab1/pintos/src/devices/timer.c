@@ -30,7 +30,7 @@ static intr_handler_func timer_interrupt;
 static void real_time_delay(int64_t num, int32_t denom);
 static void real_time_sleep(int64_t num, int32_t denom);
 struct list sleep_list;
-list_init (&sleep_list);
+list_init (*sleep_list);
 /*initial a list*/
 /* 
  * Sets up the timer to interrupt TIMER_FREQ times per second,
@@ -108,8 +108,7 @@ void timer_sleep(int64_t ticks)
   //   thread_yield();
   struct thread *current_thread = thread_current();
   current_thread->time_wakeup = ticks + start;
-  current_thread->thread_block=
-  list_push_back(sleep_list,current_thread);
+  list_push_back(*sleep_list,current_thread);
   intr_disable();
   thread_block();
   // schedule();
