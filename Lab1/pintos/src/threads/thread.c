@@ -11,6 +11,7 @@
 #include "threads/switch.h"
 #include "threads/synch.h"
 #include "threads/vaddr.h"
+#include "list.h"
 #ifdef USERPROG
 #include "userprog/process.h"
 #endif
@@ -123,7 +124,10 @@ void
 thread_tick (void) 
 {
   struct thread *t = thread_current ();
-
+  while (t->time_wakeup<=ticks){
+    thread_unblock(t);
+    list_remove(t);  
+   }
   /* Update statistics. */
   if (t == idle_thread)
     idle_ticks++;
@@ -172,7 +176,6 @@ thread_create (const char *name, int priority,
   struct switch_threads_frame *sf;
   tid_t tid;
   enum intr_level old_level;
-  // t->time_wakeup=0;
   ASSERT (function != NULL);
 
   /* Allocate thread. */
@@ -183,6 +186,7 @@ thread_create (const char *name, int priority,
   /* Initialize thread. */
   init_thread (t, name, priority);
   tid = t->tid = allocate_tid ();
+  t->time_wakeup=0;
 
   /* Prepare thread for first run by initializing its stack.
      Do this atomically so intermediate values for the 'stack' 
