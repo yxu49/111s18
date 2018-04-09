@@ -310,6 +310,14 @@ void thread_exit(void)
   schedule();
   NOT_REACHED();
 }
+// void blocked_thread_check(struct thread *t, void *aux UNUSED){
+//   if (t->status==THREAD_BLOCKED&&t->time_wakeup>0){
+//     t->time_wakeup--;
+//     if (t->time_wakeup==0){
+//       thread_unblock(t);
+//     }
+//   }
+// }
 
 /* Yields the CPU.  The current thread is not put to sleep and
    may be scheduled again immediately at the scheduler's whim. */
