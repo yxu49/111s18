@@ -109,9 +109,9 @@ void timer_sleep(int64_t ticks)
   current_thread->time_wakeup = ticks + start;
   intr_disable();
   thread_block();
-  // schedule();
   intr_enable();
-
+  schedule();
+// 
 }
 
 /* 
