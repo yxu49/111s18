@@ -124,10 +124,7 @@ void
 thread_tick (void) 
 {
   struct thread *t = thread_current ();
-  while (t->time_wakeup<=ticks){
-    thread_unblock(t);
-    list_remove(t);  
-   }
+ 
   /* Update statistics. */
   if (t == idle_thread)
     idle_ticks++;
