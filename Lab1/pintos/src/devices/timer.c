@@ -113,9 +113,10 @@ void timer_sleep(int64_t ticks)
 
   thread_block();
   // schedule();
-  // while(){
-
-  // }
+  while (t->time_wakeup<=ticks){
+    thread_unblock(t);
+    list_remove(t);  
+   }
 }
 
 /* 
