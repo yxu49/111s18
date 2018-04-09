@@ -1,0 +1,34 @@
+qemu-system-x86_64 -hda /tmp/ED79wYQKsy.dsk -m 4 -net none -nographic -monitor null
+PiLo hda1
+Loading.........
+Kernel command line: -q run alarm-simultaneous
+Pintos booting with 3,968 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+Unexpected interrupt 0x0e (#PF Page-Fault Exception)
+
+TIMEOUT after 20 seconds of host CPU time
