@@ -28,6 +28,8 @@ static struct list ready_list;
 /* List of all processes.  Processes are added to this list
    when they are first scheduled and removed when they exit. */
 static struct list all_list;
+/*initial a list to store sleeping thread*/
+static struct list sleep_list;
 
 /* Idle thread. */
 static struct thread *idle_thread;
@@ -92,6 +94,7 @@ void thread_init(void)
   lock_init(&tid_lock);
   list_init(&ready_list);
   list_init(&all_list);
+  list_init (&sleep_list);
 
   /* Set up a thread structure for the running thread. */
   initial_thread = running_thread();
@@ -229,6 +232,9 @@ void thread_block(void)
   ASSERT(intr_get_level() == INTR_OFF);
 
   thread_current()->status = THREAD_BLOCKED;
+  struct thread *t = thread_current();
+  
+  list_push_back (&sleep_list, &t->elem);
   schedule();
 }
 
