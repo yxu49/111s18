@@ -124,7 +124,7 @@ void thread_start(void)
 void thread_tick(void)
 {
   struct thread *t = thread_current();
-  if (t->status==THREAD_BLOCKED)
+  if (t->status==THREAD_BLOCKED&&t->time_wakeup>0)
   {
     t->time_wakeup--;
   }
