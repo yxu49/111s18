@@ -123,12 +123,12 @@ void thread_tick(void)
   struct thread *t = thread_current();
   if (t->status==THREAD_BLOCKED)
   {
-    current_thread->time_wakeup--;
+    t->time_wakeup--;
   }
-  if (current_thread->time_wakeup == 0)
+  if (t->time_wakeup == 0)
   {
-    thread_unblock(current_thread);
-    list_remove(current_thread);
+    thread_unblock(t);
+    list_remove(t);
   }
 
   /* Update statistics. */
