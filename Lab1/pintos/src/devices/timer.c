@@ -102,7 +102,7 @@ void timer_sleep(int64_t ticks)
     return;
   }
   int64_t start = timer_ticks();
-  // ASSERT(intr_get_level() == INTR_ON);
+  ASSERT(intr_get_level() == INTR_ON);
   // while (timer_elapsed(start) < ticks)
   //   thread_yield();
   struct thread *current_thread = thread_current();
