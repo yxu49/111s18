@@ -108,15 +108,12 @@ void timer_sleep(int64_t ticks)
   //   thread_yield();
   struct thread *current_thread = thread_current();
   current_thread->time_wakeup = ticks + start;
+  current_thread->thread_block=
   list_push_back(sleep_list,current_thread);
   intr_disable();
-
   thread_block();
   // schedule();
-  while (current_thread->time_wakeup<=ticks){
-    thread_unblock(current_thread);
-    list_remove(current_thread);  
-   }
+
 }
 
 /* 
