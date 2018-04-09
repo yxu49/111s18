@@ -29,8 +29,7 @@ static void busy_wait(int64_t loops);
 static intr_handler_func timer_interrupt;
 static void real_time_delay(int64_t num, int32_t denom);
 static void real_time_sleep(int64_t num, int32_t denom);
-struct list sleep_list;
-list_init (*sleep_list);
+
 /*initial a list*/
 /* 
  * Sets up the timer to interrupt TIMER_FREQ times per second,
