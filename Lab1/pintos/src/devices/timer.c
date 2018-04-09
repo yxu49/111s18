@@ -107,10 +107,10 @@ void timer_sleep(int64_t ticks)
   //   thread_yield();
   struct thread *current_thread = thread_current();
   current_thread->time_wakeup = ticks + start;
-  list_push_back(sleep_list,current_thread);
   intr_disable();
   thread_block();
   // schedule();
+  intr_enable();
 
 }
 
