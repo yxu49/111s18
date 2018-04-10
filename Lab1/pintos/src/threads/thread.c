@@ -172,6 +172,8 @@ tid_t thread_create(const char *name, int priority,
   tid_t tid;
   enum intr_level old_level;
   ASSERT(function != NULL);
+  t->time_wakeup = 0;
+  
 
   /* Allocate thread. */
   t = palloc_get_page(PAL_ZERO);
@@ -181,7 +183,6 @@ tid_t thread_create(const char *name, int priority,
   /* Initialize thread. */
   init_thread(t, name, priority);
   tid = t->tid = allocate_tid();
-  t->time_wakeup = 0;
 
   /* Prepare thread for first run by initializing its stack.
      Do this atomically so intermediate values for the 'stack' 
@@ -223,10 +224,7 @@ void thread_block(void)
   ASSERT(intr_get_level() == INTR_OFF);
 
   thread_current()->status = THREAD_BLOCKED;
-  struct thread *t = thread_current();
-  
-  list_push_back (&sleep_list, &t->elem);
-  schedule();
+    schedule();
 }
 
 /* Transitions a blocked thread T to the ready-to-run state.
