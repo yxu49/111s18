@@ -132,6 +132,8 @@ void thread_tick(void)
   {
     thread_unblock(t);
     list_remove(t);
+    list_push_back (&ready_list, &t->elem);
+    
   }
 
   /* Update statistics. */
