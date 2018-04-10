@@ -171,7 +171,6 @@ tid_t thread_create(const char *name, int priority,
   tid_t tid;
   enum intr_level old_level;
   ASSERT(function != NULL);
-  t->time_wakeup = 0;
 
   /* Allocate thread. */
   t = palloc_get_page(PAL_ZERO);
@@ -203,6 +202,7 @@ tid_t thread_create(const char *name, int priority,
   sf->ebp = 0;
 
   intr_set_level(old_level);
+  t->time_wakeup = 0;
 
   /* Add to run queue. */
   thread_unblock(t);
