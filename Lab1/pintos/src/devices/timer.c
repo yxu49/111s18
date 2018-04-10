@@ -203,9 +203,10 @@ void check_blocked_thread(struct thread *t, void *aux UNUSED)
 static void
 timer_interrupt(struct intr_frame *args UNUSED)
 {
+  thread_foreach(check_blocked_thread, NULL);
+  
   ticks++;
   thread_tick();
-  thread_foreach(check_blocked_thread, NULL);
 }
 
 /* 
