@@ -204,8 +204,10 @@ void check_blocked_thread(struct thread *t, void *aux UNUSED)
 static void
 timer_interrupt(struct intr_frame *args UNUSED)
 {
-  thread_foreach(check_blocked_thread, NULL);
   ticks++;
+  enum intr_level old_level=intr_disable();
+  thread_foreach(check_blocked_thread, NULL);
+  intr_set_level(old_level);
   thread_tick();
 }
 
