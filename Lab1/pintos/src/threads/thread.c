@@ -172,7 +172,6 @@ tid_t thread_create(const char *name, int priority,
   enum intr_level old_level;
   ASSERT(function != NULL);
   t->time_wakeup = 0;
-  
 
   /* Allocate thread. */
   t = palloc_get_page(PAL_ZERO);
@@ -223,7 +222,7 @@ void thread_block(void)
   ASSERT(intr_get_level() == INTR_OFF);
 
   thread_current()->status = THREAD_BLOCKED;
-    schedule();
+  schedule();
 }
 
 /* Transitions a blocked thread T to the ready-to-run state.
@@ -298,7 +297,6 @@ void thread_exit(void)
   schedule();
   NOT_REACHED();
 }
-
 
 /* Yields the CPU.  The current thread is not put to sleep and
    may be scheduled again immediately at the scheduler's whim. */
