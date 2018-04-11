@@ -104,12 +104,12 @@ void timer_sleep(int64_t ticks)
   struct list sleep_list;
   list_init(&sleep_list);
   
-  int64_t start = timer_ticks ();
+  // int64_t start = timer_ticks ();
 
   ASSERT(intr_get_level() == INTR_ON);
   enum intr_level old_level = intr_disable();/*put it to sleep*/
   struct thread *t = thread_current();
-  t->time_wakeup = ticks+start;
+  t->time_wakeup = ticks;
   list_push_back(&sleep_list,&t->sleep_elem);
   thread_block();
   intr_set_level(old_level);
@@ -213,9 +213,10 @@ timer_interrupt(struct intr_frame *args UNUSED)
 {
   ticks++;
   enum intr_level old_level=intr_disable();/* intr off*/
+  thread_tick();
+  
   thread_foreach(check_blocked,NULL);
   intr_set_level(old_level);/*recover to origal intr_level*/
-  thread_tick();
 }
 
 /* 
