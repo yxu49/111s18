@@ -197,7 +197,7 @@ void timer_print_stats(void)
 //     t->time_wakeup--;
 //     if (t->time_wakeup == 0)
 //     {
-//       // list_remove()
+//      
 //       thread_unblock(t);
 //     }
 //   }
