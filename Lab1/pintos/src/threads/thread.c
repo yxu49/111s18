@@ -220,6 +220,7 @@ void thread_block(void)
 {
   ASSERT(!intr_context());
   ASSERT(intr_get_level() == INTR_OFF);
+  struct thread *t= thread_current();
   list_push_back(&sleep_list, &t->elem);
 
   thread_current()->status = THREAD_BLOCKED;
