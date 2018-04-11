@@ -319,8 +319,6 @@ void thread_yield(void)
 void thread_foreach_sleep(void)
 {
   struct list_elem *e;
-  struct list remove_list;
-  list_init(&remove_list);
   ASSERT(intr_get_level() == INTR_OFF);
 
   for (e = list_begin(&sleep_list); e != list_end(&sleep_list);
@@ -337,7 +335,7 @@ void thread_foreach_sleep(void)
         thread_unblock(t);
       }
     }
-    // func(t, aux);
+    func(t, aux);
   }
 }
 /* Invoke function 'func' on all threads, passing along 'aux'.
