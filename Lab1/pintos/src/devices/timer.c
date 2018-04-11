@@ -200,6 +200,7 @@ void check_blocked(struct thread *t, void *aux UNUSED)
     t->time_wakeup--;
     if (t->time_wakeup == 0)
     {
+      list_remove(&t->sleep_elem);     
       thread_unblock(t);
     }
   }
