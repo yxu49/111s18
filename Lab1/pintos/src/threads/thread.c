@@ -94,7 +94,6 @@ void thread_init(void)
   lock_init(&tid_lock);
   list_init(&ready_list);
   list_init(&all_list);
-  list_init(&sleep_list);
   /* Set up a thread structure for the running thread. */
   initial_thread = running_thread();
   init_thread(initial_thread, "main", PRI_DEFAULT);
@@ -221,7 +220,7 @@ void thread_block(void)
   ASSERT(!intr_context());
   ASSERT(intr_get_level() == INTR_OFF);
   struct thread *t= thread_current();
-  // list_push_back(&sleep_list, &t->sleep_elem);
+  // list_push_back(&sleep_list, &t->sleep_elem); 
   thread_current()->status = THREAD_BLOCKED;
   schedule();
 }

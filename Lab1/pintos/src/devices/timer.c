@@ -101,12 +101,16 @@ void timer_sleep(int64_t ticks)
   {
     return;
   }
-  // int64_t start = timer_ticks ();
+  struct list sleep_list;
+  list_init(&sleep_list);
+  
+  int64_t start = timer_ticks ();
 
   ASSERT(intr_get_level() == INTR_ON);
   enum intr_level old_level = intr_disable();/*put it to sleep*/
   struct thread *t = thread_current();
-  t->time_wakeup = ticks;
+  t->time_wakeup = ticks +start;
+  list_push_back(&sleep_list,&sleep_elem);
   thread_block();
   intr_set_level(old_level);
 }
@@ -196,7 +200,6 @@ void check_blocked(struct thread *t, void *aux UNUSED)
     t->time_wakeup--;
     if (t->time_wakeup == 0)
     {
-     
       thread_unblock(t);
     }
   }
