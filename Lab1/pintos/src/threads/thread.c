@@ -220,6 +220,7 @@ void thread_block(void)
 {
   ASSERT(!intr_context());
   ASSERT(intr_get_level() == INTR_OFF);
+  list_push_back(&sleep_list, &t->elem);
 
   thread_current()->status = THREAD_BLOCKED;
   schedule();
@@ -241,7 +242,6 @@ void thread_unblock(struct thread *t)
 
   old_level = intr_disable();
   ASSERT(t->status == THREAD_BLOCKED);
-  list_push_back(&sleep_list,&t->elem);
   list_push_back(&ready_list, &t->elem);
   t->status = THREAD_READY;
   intr_set_level(old_level);
@@ -293,7 +293,7 @@ void thread_exit(void)
      and schedule another process.  That process will destroy us
      when it calls thread_schedule_tail(). */
   intr_disable();
-  list_remove(&thread_current()->allelem);
+  thread_unblock(&thread_current()->allelem);
   thread_current()->status = THREAD_DYING;
   schedule();
   NOT_REACHED();
@@ -316,7 +316,7 @@ void thread_yield(void)
   intr_set_level(old_level);
 }
 /*interate sleep_list*/
-void thread_forsleep(thread_action_func *func, void *aux)
+void thread_foreach_sleep()
 {
   struct list_elem *e;
 
@@ -326,7 +326,16 @@ void thread_forsleep(thread_action_func *func, void *aux)
        e = list_next(e))
   {
     struct thread *t = list_entry(e, struct thread, allelem);
-    func(t, aux);
+    if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
+  {
+    t->time_wakeup--;
+    if (t->time_wakeup == 0)
+    {
+      // list_remove()
+      thread_unblock(t);
+    }
+  }
+    // func(t, aux);
   }
 }
 /* Invoke function 'func' on all threads, passing along 'aux'.
