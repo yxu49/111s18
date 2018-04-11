@@ -1,4 +1,4 @@
-qemu-system-x86_64 -hda /tmp/h_mSKbzpwb.dsk -m 4 -net none -nographic -monitor null
+qemu-system-x86_64 -hda /tmp/yBL0h9TH0g.dsk -m 4 -net none -nographic -monitor null
 PiLo hda1
 Loading.........
 Kernel command line: -q run alarm-multiple
@@ -15,7 +15,7 @@ Executing 'alarm-multiple':
 (alarm-multiple) If successful, product of iteration count and
 (alarm-multiple) sleep duration will appear in nondescending order.
 Kernel PANIC at ../../threads/thread.c:240 in thread_unblock(): assertion `is_thread(t)' failed.
-Call stack: 0xc0027699.
+Call stack: 0xc0027694.
 The `backtrace' program can make call stacks useful.
 Read "Backtraces" in the "Debugging Tools" chapter
 of the Pintos documentation for more information.

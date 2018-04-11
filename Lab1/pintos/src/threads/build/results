@@ -3,4 +3,3 @@ FAIL tests/threads/alarm-multiple
 FAIL tests/threads/alarm-simultaneous
 pass tests/threads/alarm-zero
 pass tests/threads/alarm-negative
-pass tests/threads/alarm-efficient
