@@ -94,7 +94,7 @@ void thread_init(void)
   lock_init(&tid_lock);
   list_init(&ready_list);
   list_init(&all_list);
-
+  list_init(&sleep_list);
   /* Set up a thread structure for the running thread. */
   initial_thread = running_thread();
   init_thread(initial_thread, "main", PRI_DEFAULT);
@@ -314,7 +314,20 @@ void thread_yield(void)
   schedule();
   intr_set_level(old_level);
 }
+/*interate sleep_list*/
+void thread_forsleep(thread_action_func *func, void *aux)
+{
+  struct list_elem *e;
 
+  ASSERT(intr_get_level() == INTR_OFF);
+
+  for (e = list_begin(&sleep_list); e != list_end(&sleep_list);
+       e = list_next(e))
+  {
+    struct thread *t = list_entry(e, struct thread, allelem);
+    func(t, aux);
+  }
+}
 /* Invoke function 'func' on all threads, passing along 'aux'.
    This function must be called with interrupts off. */
 void thread_foreach(thread_action_func *func, void *aux)
