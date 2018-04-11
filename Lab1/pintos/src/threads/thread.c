@@ -317,7 +317,7 @@ void thread_yield(void)
   intr_set_level(old_level);
 }
 /*interate sleep_list*/
-void thread_foreach_sleep()
+void thread_foreach_sleep(void)
 {
   struct list_elem *e;
   struct list remove_list;
