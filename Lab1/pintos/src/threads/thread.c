@@ -176,7 +176,7 @@ tid_t thread_create(const char *name, int priority,
   if (t == NULL)
     return TID_ERROR;
   t->time_wakeup = 0;
-  t->sleep_elem;
+  // t->sleep_elem;
   /* Initialize thread. */
   init_thread(t, name, priority);
   tid = t->tid = allocate_tid();
