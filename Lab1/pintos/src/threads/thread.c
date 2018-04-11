@@ -335,7 +335,7 @@ void thread_foreach_sleep(void)
         thread_unblock(t);
       }
     }
-    func(t, aux);
+    // func(t, aux);
   }
 }
 /* Invoke function 'func' on all threads, passing along 'aux'.

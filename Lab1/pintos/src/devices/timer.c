@@ -108,7 +108,6 @@ void timer_sleep(int64_t ticks)
   struct thread *t = thread_current();
   t->time_wakeup = ticks;
   thread_block();
-  
   intr_set_level(old_level);
 }
 
