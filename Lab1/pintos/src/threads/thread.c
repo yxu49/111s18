@@ -316,27 +316,27 @@ void thread_yield(void)
   intr_set_level(old_level);
 }
 /*interate sleep_list*/
-void thread_foreach_sleep(void)
-{
-  struct list_elem *e;
-  ASSERT(intr_get_level() == INTR_OFF);
+// void thread_foreach_sleep(void)
+// {
+//   struct list_elem *e;
+//   ASSERT(intr_get_level() == INTR_OFF);
 
-  for (e = list_begin(&sleep_list); e != list_end(&sleep_list);
-       e = list_next(e))
-  {
-    struct thread *t = list_entry(e, struct thread, sleep_elem);
-    if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
-    {
-      t->time_wakeup--;
-      if (t->time_wakeup == 0)
-      {
-        list_remove(e);
-        thread_unblock(t);
-      }
-    }
-    // func(t, aux);
-  }
-}
+//   for (e = list_begin(&sleep_list); e != list_end(&sleep_list);
+//        e = list_next(e))
+//   {
+//     struct thread *t = list_entry(e, struct thread, sleep_elem);
+//     if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
+//     {
+//       t->time_wakeup--;
+//       if (t->time_wakeup == 0)
+//       {
+//         list_remove(e);
+//         thread_unblock(t);
+//       }
+//     }
+//     // func(t, aux);
+//   }
+// }
 /* Invoke function 'func' on all threads, passing along 'aux'.
    This function must be called with interrupts off. */
 void thread_foreach(thread_action_func *func, void *aux)
