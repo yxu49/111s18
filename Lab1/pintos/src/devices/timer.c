@@ -189,7 +189,7 @@ void timer_print_stats(void)
 }
 
 
-void check_blocked_thread(struct thread *t, void *aux UNUSED)
+void check_blocked(struct thread *t, void *aux UNUSED)
 {
   if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
   {
@@ -207,11 +207,9 @@ static void
 timer_interrupt(struct intr_frame *args UNUSED)
 {
   ticks++;
-  // *enum intr_level old_level*/
-  intr_disable();
-  thread_foreach(check_blocked_thread, NULL);
-  // intr_set_level(old_level);
-  intr_enable();
+  enum intr_level old_level=intr_disable();
+  thread_foreach(check_blocked, NULL);
+  intr_set_level(old_level);
   thread_tick();
 }
 
