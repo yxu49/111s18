@@ -108,7 +108,7 @@ void timer_sleep(int64_t ticks)
   struct thread *t = thread_current();
   t->time_wakeup = ticks;
   thread_block();
-
+  
   intr_set_level(old_level);
 }
 
@@ -190,18 +190,18 @@ void timer_print_stats(void)
 }
 
 /*to check if the thread is blocked*/
-void check_blocked(struct thread *t, void *aux UNUSED)
-{
-  if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
-  {
-    t->time_wakeup--;
-    if (t->time_wakeup == 0)
-    {
-      list_remove(&thread_current()->allelem);
-      thread_unblock(t);
-    }
-  }
-}
+// void check_blocked(struct thread *t, void *aux UNUSED)
+// {
+//   if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
+//   {
+//     t->time_wakeup--;
+//     if (t->time_wakeup == 0)
+//     {
+//       // list_remove()
+//       thread_unblock(t);
+//     }
+//   }
+// }
 /* 
  * Timer interrupt handler. 
  */
@@ -210,7 +210,7 @@ timer_interrupt(struct intr_frame *args UNUSED)
 {
   ticks++;
   enum intr_level old_level=intr_disable();/* intr off*/
-  thread_forsleep(check_blocked, NULL);
+  thread_foreach_sleep();
   intr_set_level(old_level);/*recover to origal intr_level*/
   thread_tick();
 }
