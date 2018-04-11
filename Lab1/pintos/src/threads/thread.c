@@ -176,6 +176,7 @@ tid_t thread_create(const char *name, int priority,
   t = palloc_get_page(PAL_ZERO);
   if (t == NULL)
     return TID_ERROR;
+  t->time_wakeup = 0;
 
   /* Initialize thread. */
   init_thread(t, name, priority);
@@ -202,7 +203,6 @@ tid_t thread_create(const char *name, int priority,
   sf->ebp = 0;
 
   intr_set_level(old_level);
-  t->time_wakeup = 0;
 
   /* Add to run queue. */
   thread_unblock(t);
