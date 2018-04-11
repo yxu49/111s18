@@ -319,7 +319,8 @@ void thread_yield(void)
 void thread_foreach_sleep()
 {
   struct list_elem *e;
-
+  struct list remove_list;
+  list_init(&remove_list);
   ASSERT(intr_get_level() == INTR_OFF);
 
   for (e = list_begin(&sleep_list); e != list_end(&sleep_list);
@@ -327,14 +328,15 @@ void thread_foreach_sleep()
   {
     struct thread *t = list_entry(e, struct thread, allelem);
     if (t->status == THREAD_BLOCKED && t->time_wakeup > 0)
-  {
-    t->time_wakeup--;
-    if (t->time_wakeup == 0)
     {
-      // list_remove()
-      thread_unblock(t);
+      t->time_wakeup--;
+      if (t->time_wakeup == 0)
+      {
+        // list_push_back(&remove_list, t->& elem);
+        list_remove(e);
+        thread_unblock(t);
+      }
     }
-  }
     // func(t, aux);
   }
 }
