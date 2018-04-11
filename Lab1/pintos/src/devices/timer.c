@@ -207,9 +207,11 @@ static void
 timer_interrupt(struct intr_frame *args UNUSED)
 {
   ticks++;
-  enum intr_level old_level=intr_disable();
+  // *enum intr_level old_level*/
+  intr_disable();
   thread_foreach(check_blocked_thread, NULL);
-  intr_set_level(old_level);
+  // intr_set_level(old_level);
+  intr_enable();
   thread_tick();
 }
 
